@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area de un Octágono Regular</title>
+</head>
+<body>
+    
+    <h1>Leonard Pirela</h1>
+    <h2>Cálculo del Area de un Octágono Regular</h2><hr><br>
+
+    <p><b>Éste programa calcula el área de un octágono regular mediante un script PHP, éste script devuelve un resultado en formato JSON que luego es mostrado por el navegador. 
+     La solicitud para el cálculo es enviada mediante AJAX.</b></p>
+
+
+    <form onsubmit="return false;" id="formularioDatos">
+        <label for="lados">Ingresa la longitud en centímetros que tendrán los lados del octágono</label><br><br>
+        <input type="number" name="lados" id="lados" /><br><br>
+        <button onclick="calcularArea()";>Calcular</button>
+    </form>
+
+
+<script type="text/javascript">
+
+ function calcularArea () {
+    
+    var solicitudHttp = new XMLHttpRequest();
+    solicitudHttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.response != ""){
+                alert("El valor del Area es: " + JSON.parse(this.response) + " centímetros cuadrados");
+            }
+        }
+    }
+
+        var datosOctagono = new FormData(document.getElementById("formularioDatos"));
+        solicitudHttp.open("POST","calcularArea.php");
+        solicitudHttp.send(datosOctagono);
+
+ }
+
+</script>
+
+
+
+</body>
+</html>
